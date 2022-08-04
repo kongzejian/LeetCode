@@ -1,0 +1,15 @@
+自己用了两个指针，其实可以只用一个指针，中间也省了很多判断越界的问题
+别人的代码:
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode cur = head;
+        while(cur != null && cur.next != null) {
+            if(cur.val == cur.next.val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return head;
+    }
+}
