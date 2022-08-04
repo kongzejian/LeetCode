@@ -1,0 +1,39 @@
+自己的思路，暴力穷举法，时间复杂度O（n^2）
+别人的思路：先让两个链表长度相等
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int lenA=len(headA);
+        int lenB=len(headB);
+        while(lenA>lenB){
+            headA=headA.next;
+            lenA--;
+        }
+         while(lenA<lenB){
+            headB=headB.next;
+            lenB--;
+        }
+        while(headA!=null){
+            if(headA.equals(headB)){
+                return headA;
+            }
+            else{
+            headA=headA.next;
+            headB=headB.next;
+            }
+        }
+        return null;
+    }
+    //获取链表长度
+    public int len(ListNode head){
+        int result=0;
+        while(true){
+        if(head!=null){
+            result+=1;
+            head=head.next;
+        }
+        else{
+            return result;
+        }
+        }
+    }
+}
