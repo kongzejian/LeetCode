@@ -1,0 +1,23 @@
+自己的思路是用死方法，把所有可能性全部考虑进去。
+官方思路：
+class Solution {
+    int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+    public String intToRoman(int num) {
+        StringBuffer roman = new StringBuffer(); //StringBuffer长度可变，用于字符串的拼接
+        for (int i = 0; i < values.length; ++i) {
+            int value = values[i]; //比如 先考虑1000
+            String symbol = symbols[i]; //symbol为M
+            while (num >= value) { 
+                num -= value;
+                roman.append(symbol); //StringBuffer可以用append这个函数
+            }
+            if (num == 0) {
+                break;
+            }
+        }
+        return roman.toString();
+    }
+}
+其实思路差不多，但是官方给的代码行数少，更加简洁
