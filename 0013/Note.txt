@@ -1,0 +1,26 @@
+自己的思路就是把特殊情况全部列出来，官方思路是一次遍历，如果当前元素小于下一个元素，就把符号改为减
+class Solution {
+    Map<Character, Integer> symbolValues = new HashMap<Character, Integer>() {{ //创建哈希表
+        put('I', 1);       //哈希表的添加方法
+        put('V', 5);
+        put('X', 10);
+        put('L', 50);
+        put('C', 100);
+        put('D', 500);
+        put('M', 1000);
+    }};
+
+    public int romanToInt(String s) {
+        int ans = 0;
+        int n = s.length();
+        for (int i = 0; i < n; ++i) {
+            int value = symbolValues.get(s.charAt(i)); //哈希表的获取方法
+            if (i < n - 1 && value < symbolValues.get(s.charAt(i + 1))) {
+                ans -= value;
+            } else {
+                ans += value;
+            }
+        }
+        return ans;
+    }
+}
