@@ -1,0 +1,14 @@
+自己的思路就是创建一个新链表，用两个指针遍历原链表，将结点添加到新链表中，中间考虑了空链表，奇数偶数的问题，代码不是很简洁
+别人的思路：
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+        return next;
+    }
+}
+采用递归的方法，膜
