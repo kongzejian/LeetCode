@@ -1,0 +1,13 @@
+自己的思路是首先考虑空链表，和要删除的元素在开头的情况，与别人的方法一思路一样。知道这题可以用递归，但是不会写：
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+       if(head==null)
+           return null; //空链表
+        head.next=removeElements(head.next,val);//接受下一级返回的东西
+        if(head.val==val){ //要给上一级返回的东西
+            return head.next;
+        }else{
+            return head;
+        }
+    }
+}
