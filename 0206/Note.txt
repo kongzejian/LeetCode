@@ -1,1 +1,16 @@
-
+自己的思路，是创建一个新链表，遍历原链表，不断将新加的结点放头结点的下一个。
+别人的思路：递归
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null){
+            return null;          //空链表
+        }
+        if(head.next==null){      //终止条件，当前结点为最后一个结点
+            return head;
+        }
+        ListNode newhead=reverseList(head.next);
+        head.next.next=head;                 
+        head.next=null;
+        return newhead;  //一直往前返回的就是原链表的最后一个结点
+}
+}
