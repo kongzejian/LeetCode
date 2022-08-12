@@ -1,0 +1,22 @@
+自己的思路：先遍历一遍链表，获取总长度，再移动到要删除的结点的前一个结点，进行删除操作
+别人的思路：
+由于我们需要找到倒数第 n个节点，因此我们可以使用两个指针，first,second 同时对链表进行遍历，并且 first 比 second 超前 n 个节点。当 first 遍历到链表的末尾时，
+second 就恰好处于倒数第 n 个节点。
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummy;
+        for (int i = 0; i < n; ++i) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        ListNode ans = dummy.next;
+        return ans;
+    }
+}
+
