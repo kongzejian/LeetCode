@@ -1,0 +1,25 @@
+自己的思路，考虑两者情况，头结点需要删除和不需要删除，需要删除的话头结点后移，不需要删除则用一个指针记录重复值结点的前一个
+别人的思路，使用dummy结点来巧妙的避免我考虑的两种情况：
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        
+        ListNode dummy = new ListNode(0, head);
+
+        ListNode cur = dummy;
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == cur.next.next.val) {
+                int x = cur.next.val;
+                while (cur.next != null && cur.next.val == x) {
+                    cur.next = cur.next.next;        
+                }
+            } else {
+                cur = cur.next;
+            }
+        }
+
+        return dummy.next;
+    }
+}
