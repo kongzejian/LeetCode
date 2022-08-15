@@ -1,0 +1,18 @@
+ 别人的思路：
+ 使用三指针，创建dummy结点为了头结点改变的情况，找到left结点的前一个结点，使用pre,head,nex三个指针进行变换，pre始终指向left前一个结点，head始终是原始pre下一个的结点，
+ nex一直在变换。
+ public static ListNode reverseBetween(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(0,head);
+        ListNode pre = dummy;
+        for(int i = 1; i < m; i++){
+            pre = pre.next;
+        }
+        head = pre.next;
+        for(int i = m; i < n; i++){
+            ListNode nex = head.next;
+            head.next = nex.next;
+            nex.next = pre.next;
+            pre.next = nex;
+        }
+        return dummy.next;
+    }
