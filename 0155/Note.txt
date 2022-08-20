@@ -1,0 +1,31 @@
+自己的思路，是用链表实现栈
+别人的思路，使用辅助栈，辅助栈的元素与原栈的元素一一对应，为原栈当前元素对应的最小值，也就是原栈当前元素下面所有元素的最小值
+class MinStack {
+    Deque<Integer> xStack;
+    Deque<Integer> minStack;
+
+    public MinStack() {
+        xStack = new LinkedList<Integer>();
+        minStack = new LinkedList<Integer>();
+        minStack.push(Integer.MAX_VALUE);
+    }
+    
+    public void push(int x) {
+        xStack.push(x);
+        minStack.push(Math.min(minStack.peek(), x));  //minStack中始终存放着存储与每个元素对应的最小值
+    }
+    
+    public void pop() {
+        xStack.pop();
+        minStack.pop();
+    }
+    
+    public int top() {
+        return xStack.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
+
