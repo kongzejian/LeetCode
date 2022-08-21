@@ -1,0 +1,81 @@
+自己的思路，先看所有字符串的第一个字母，从头到尾两两比较，如果全部一样，结果中添加第一个字符；再看所有字符串的第二个字符，以此类推，纵向扫描的思路
+别人的纵向扫描：
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        int length = strs[0].length(); //第一个字符串的长度
+        int count = strs.length; //字符串的个数
+        for (int i = 0; i < length; i++) {
+            char c = strs[0].charAt(i);//依次遍历第一个字符串的所有字符
+            for (int j = 1; j < count; j++) { //遍历其他字符串与第一个字符串对应的字符
+                if (i == strs[j].length() || strs[j].charAt(i) != c) {
+                    return strs[0].substring(0, i);
+                }
+            }
+        }
+        return strs[0];
+    }
+}
+
+二分查找法：
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        int minLength = Integer.MAX_VALUE;
+        for (String str : strs) {
+            minLength = Math.min(minLength, str.length());
+        }                                                     //找到所有字符串中最短的字符串
+        int low = 0, high = minLength;
+        while (low < high) {
+            int mid = (high - low + 1) / 2 + low;
+            if (isCommonPrefix(strs, mid)) {         //前半部分相等，搜索mid-high的部分
+                low = mid;                           
+            } else {
+                high = mid - 1;                 //前半部分不等，搜索0-mid-1的部分
+            }
+        }
+        return strs[0].substring(0, low);
+    }
+
+    public boolean isCommonPrefix(String[] strs, int length) {
+        String str0 = strs[0].substring(0, length); //截取第一个字符串的0-length的部分
+        int count = strs.length; //字符串的个数
+        for (int i = 1; i < count; i++) {
+            String str = strs[i];
+            for (int j = 0; j < length; j++) {
+                if (str0.charAt(j) != str.charAt(j)) {
+                    return false;             //与其他字符串比较，看是都有这个部分
+                }
+            }
+        }
+        return true;
+    }
+}
+
+简单的别人的思路：
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        int min=strs[0].length();
+        int index=0;
+        for(int i=1;i<strs.length;i++){
+            if(strs[i].length()<min){
+                min=strs[i].length();
+                index=i;
+            }
+        } //先找到最短的字符串
+        String str=strs[index];
+        for(int i=0;i<strs.length;i++){
+            String demo=strs[i].substring(0,min); //将其他字符串截取到一样的长度
+            while(!demo.equals(str)&&min!=0){     //如果不相等且min不为0 
+                str=str.substring(0,--min);      //各自退一步，海阔天空
+                demo=demo.substring(0,min);
+            }
+        }
+        return str;
+    }
+}
+
