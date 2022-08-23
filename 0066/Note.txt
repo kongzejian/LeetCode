@@ -1,0 +1,21 @@
+
+自己的思路：如果当前为加一不为10，加一之后返回数组；如果加一等于10，当前元素设为0，继续循环，考虑更高一位。
+优化：跳出循环，说明全为0，不用遍历数组赋值，因为默认都为0
+class Solution {
+    public int[] plusOne(int[] digits) {
+         for(int i=digits.length-1;i>=0;i--){
+            if(digits[i]+1==10){
+                digits[i]=0;
+            }
+            else {
+                digits[i]+=1;
+                return digits;
+
+            }
+        }
+        int[] result=new int[digits.length+1];
+        result[0]=1;
+        return result;
+        
+    }
+}
