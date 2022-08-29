@@ -1,0 +1,30 @@
+自己的思路：
+1.初始化一个n长度的数组t，所有元素全为0
+2.遍历给定数组，数值减一后作为t的索引，将此索引处的元素设为-1
+3.遍历数组t,将还是为0的的索引，加一后添加入答案中
+
+别人的思路：
+ int x = (num - 1) % n;
+ nums[x] += n;
+ 这两行太妙了，既保证了元素增大，也保证了增大后还可以寻找到原元素所指向的索引，如元素2对应索引1,长度为8，（2+8-1）%8=1，索引还是1，只需要遍历两遍数组
+            
+            
+            
+            
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int n = nums.length;
+        for (int num : nums) {
+            int x = (num - 1) % n;
+            nums[x] += n;
+        }
+        List<Integer> ret = new ArrayList<Integer>();
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= n) {
+                ret.add(i + 1);
+            }
+        }
+        return ret;
+    }
+}
+
