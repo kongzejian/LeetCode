@@ -1,0 +1,25 @@
+自己的思路：最坏情况遍历两遍（唯一的目标字符在最末尾）
+官方答案：遍历2遍，代码更简洁
+1.从左往右遍历一遍，计算与前一个目标字符的距离
+2.从右往左遍历一遍，计算与前一个目标字符的距离，并与步骤1取最小值
+class Solution {
+    public int[] shortestToChar(String s, char c) {
+        int n = s.length();
+        int[] ans = new int[n];
+
+        for (int i = 0, idx = -n; i < n; ++i) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+            ans[i] = i - idx;
+        }
+
+        for (int i = n - 1, idx = 2 * n; i >= 0; --i) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+            ans[i] = Math.min(ans[i], idx - i);
+        }
+        return ans;
+    }
+}
