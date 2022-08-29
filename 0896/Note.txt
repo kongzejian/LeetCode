@@ -1,0 +1,27 @@
+自己的思路：
+需要考虑相等的情况，采用了递归，效率不高
+别人的思路，自己写了一下，increase和decrease分开考虑：
+class Solution {
+    public boolean isMonotonic(int[] nums) {
+        return increase(nums) || decrease(nums);
+    }
+    public boolean increase(int[] nums){
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]>nums[i+1]){
+                return false;
+            }
+        }
+            return true;
+        }
+
+    
+    public boolean decrease(int[] nums){
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]<nums[i+1]){
+                return false;
+            }
+        }
+            return true;
+        
+}
+}
