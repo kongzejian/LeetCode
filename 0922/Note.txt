@@ -1,0 +1,23 @@
+自己的思路：遍历数组，分两种情况，1.索引为奇数值为偶，向后寻找数值为奇的交换2.索引为偶，数值为奇，向后寻找数值为偶的交换，缺点是已经正确的元素也变动了
+别人的思路：每次跳2步，避免了将正确的元素位置变动的情况
+class Solution {
+    public int[] sortArrayByParityII(int[] nums) {
+        int n = nums.length;
+        int j = 1;
+        for (int i = 0; i < n; i += 2) {
+            if (nums[i] % 2 == 1) {
+                while (nums[j] % 2 == 1) {
+                    j += 2;
+                }
+                swap(nums, i, j);
+            }
+        }   
+        return nums;
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
