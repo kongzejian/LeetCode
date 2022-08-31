@@ -1,24 +1,25 @@
 class Solution {
     public boolean lemonadeChange(int[] bills) {
-       int[] money_have=new int[]{0,0}; //数组第一个是5元的个数，第二个元素是10元的个数
+       int five=0;
+       int ten=0;
         for(int i=0;i<bills.length;i++){
             if(bills[i]==5){
-                money_have[0]+=1;
+                five+=1;
             } else if (bills[i]==10) {
-                if(money_have[0]==0){
+                if(five==0){
                     return false;
                 }
                 else {
-                    money_have[0]=money_have[0]-1;
-                    money_have[1]=money_have[1]+1;
+                    five=five-1;
+                    ten=ten+1;
                 }
             }
             else {
-                if(money_have[0]>=1 && money_have[1]>=1){
-                    money_have[0]=money_have[0]-1;
-                    money_have[1]=money_have[1]-1;
-                } else if (money_have[0]>=3 && money_have[1]==0) {
-                    money_have[0]=money_have[0]-3;
+                if(five>=1 && ten>=1){
+                   five=five-1;
+                    ten=ten-1;
+                } else if (five>=3 && ten==0) {
+                    five=five-3;
                 }
                 else {
                     return false;
