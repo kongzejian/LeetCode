@@ -1,0 +1,15 @@
+自己的思路：创建一个临时数组，先遍历原数组，想临时数组内存放非0元素，再临时数组的所有元素赋值给原数组，空间复杂度O（n）,时间复杂度O（n），但是遍历了两遍
+别人的思路： 只遍历一遍并且没有用临时数组
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int index=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=0){
+                nums[index++]=nums[i];
+            }
+        }
+        for(int i=index;i<nums.length;i++){
+            nums[i]=0;
+        }
+    }
+}
