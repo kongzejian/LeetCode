@@ -1,0 +1,2 @@
+这个题目比较难读懂，意思是guess(玩家猜的数)，返回结果是法案和玩家猜的数的大小关系，由于使用的是二分法，玩家猜的数是mid，所以
+通过guess(mid)来获得大小关系，另外mid=right+(left-right)/2需统一，定式：(左闭右闭，记录答案，right<=right,right=mid+1,left=mid-1)
