@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;          //如果根节点为空，深度为0
+        }
+        if(root.left==null && root.right==null){ 如果根节点为子节点，深度为1
+            return 1;
+        }
+        int left_max=maxDepth(root.left); //左子树的深度
+        int right_max=maxDepth(root.right); //右子树的深度
+        if(left_max>right_max){
+            return 1+left_max;    //加上根节点的1和左子树的深度
+        }
+        else{
+            return 1+right_max; //加上根节点的1和右子树的深度
+        }
+    }
+}
