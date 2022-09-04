@@ -1,0 +1,4 @@
+自己的思路：二分查找，return right是试出来的
+缜密的分析：
+right是小于某树的最大值
+我们要找到k*k<=x的最大值，所以return right
