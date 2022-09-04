@@ -1,0 +1,20 @@
+自己的思路：二分查找，使用Num/mid是否等于mid，但是要考虑小数点被舍去的特殊情况
+别人的思路：使用mid的平方和原数比较
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        int left = 0, right = num;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            long square = (long) mid * mid;
+            if (square < num) {
+                left = mid + 1;
+            } else if (square > num) {
+                right = mid - 1;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
