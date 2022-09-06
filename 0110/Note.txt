@@ -1,0 +1,18 @@
+自己的思路：
+从上而下递归，把所有高度都算一遍，时间复杂度较高
+官方答案的方法二，从下而上递归，及时止损
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return recur(root) != -1;
+    }
+
+    private int recur(TreeNode root) {
+        if (root == null) return 0; //高度为0
+        int left = recur(root.left); //左子树的高度
+        if(left == -1) return -1; //说明左子树不平衡，及时止损返回-1
+        int right = recur(root.right); //左子树平衡，计算右子树的高度
+        if(right == -1) return -1; //左子树平衡，右子树不平静，及时止损，返回-1
+        return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1; //左子树右子树都平衡，但要查看两者高度之差
+    }
+}
+
