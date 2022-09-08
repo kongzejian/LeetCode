@@ -1,0 +1,38 @@
+自己的代码虽然跑通了，但不够优化
+别人的代码：
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+       if(root==null){
+            return null;
+        }
+        else if(root.val<low){
+            root.left=null;
+            root=root.right;
+            return trimBST(root,low,high);
+        }
+        else if(root.val>high){
+            root.right=null;
+            root=root.left;
+            return trimBST(root,low,high);
+        }
+        root.left=trimBST(root.left,low,high);
+        root.right=trimBST(root.right,low,high);
+        return root;
+    }
+}
+
