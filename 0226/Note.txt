@@ -1,0 +1,64 @@
+思路：把所有的结点的左右交换一遍就可以，可以使用先序遍历，后序遍历，层序遍历，但是使用中序遍历需要注意！！！！
+
+利用前序遍历
+class Solution {
+        // 先序遍历--从顶向下交换
+        public TreeNode invertTree(TreeNode root) { //根->左->右
+            if (root == null) return null;
+            // 保存右子树
+            TreeNode rightTree = root.right;
+            // 交换左右子树的位置
+            root.right = invertTree(root.left);
+            root.left = invertTree(rightTree);
+            return root;
+        }
+    }
+
+利用中序遍历
+class Solution {
+    public TreeNode invertTree(TreeNode root) { //左->根->右
+            if (root == null) return null;
+            invertTree(root.left); // 递归找到左节点
+            TreeNode rightNode= root.right; // 保存右节点
+            root.right = root.left;
+            root.left = rightNode; //根结点交换左右子树
+            // 递归找到右节点 继续交换 : 因为此时左右节点已经交换了,所以此时的右节点还为root.left
+            invertTree(root.left); 
+    }
+}
+
+利用后序遍历
+ class Solution {
+        public TreeNode invertTree(TreeNode root) { //左->右->根
+            // 后序遍历-- 从下向上交换
+            if (root == null) return null;
+            TreeNode leftNode = invertTree(root.left);
+            TreeNode rightNode = invertTree(root.right);
+            root.right = leftNode;
+            root.left = rightNode;
+            return root;
+        }
+    }
+
+利用层次遍历
+   class Solution {
+        public TreeNode invertTree(TreeNode root) { //一层一层依次遍历
+            // 层次遍历--直接左右交换即可
+            if (root == null) return null;
+            Queue<TreeNode> queue = new LinkedList<>(); //辅助队列（先进先出）
+            queue.offer(root);
+            while (!queue.isEmpty()){
+                TreeNode node = queue.poll(); //弹出的元素
+                TreeNode rightTree = node.right;
+                node.right = node.left;
+                node.left = rightTree;  //弹出的元素左右子树交换位置
+                if (node.left != null){
+                    queue.offer(node.left); //向辅助队列中塞入弹出元素的左子树
+                }
+                if (node.right != null){
+                    queue.offer(node.right); //向辅助队列中塞入弹出元素的右子树
+                }
+            }
+            return root;
+        }
+    }
