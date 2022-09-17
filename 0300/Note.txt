@@ -1,0 +1,2 @@
+动态规划，dp[i]为以i为最后一个数字的递增子序列的最大长度
+转移方程：dp[i]=max(dp[j])+1 where 0<=j<i && nums[i]>num[j]
