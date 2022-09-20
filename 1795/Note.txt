@@ -1,0 +1,5 @@
+知识点
+列转行：
+利用union或union all把不同的select语句拼接起来
+行转列：
+利用case when或if ，结合group by，得使用聚合函数
