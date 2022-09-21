@@ -1,0 +1,8 @@
+剪枝操作：
+path.size()，已经有了这么多元素
+n-i>=k-path.size()
+已经有了3个元素，要求5个元素，还需要2个元素
+n-i>=2，如果i=n-1，就只剩一个了，所以最多遍历到i=n-(k-path.size())，
+条件：i<=(9-(k-path.size())+1)
+如果i大于targetsum，return
+如果sum已经大于targetsum，return
