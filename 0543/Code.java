@@ -14,19 +14,19 @@
  * }
  */
 class Solution {
-   public int max=1; //全局变量，记录直径最大值
+   public int max=0; //全局变量，记录直径最大值
     public int diameterOfBinaryTree(TreeNode root) {
         deep(root);
-        return max-1;
+        return max;
     }
     public int deep(TreeNode root){
         if(root==null){
             return 0;
         }
-        int Ldeep=deep(root.left);
-        int Rdeep=deep(root.right);
-            max=Math.max(Rdeep+Ldeep+1,max); //更新直径最大值
+        int Ldeep=deep(root.left); //左子树的深度
+        int Rdeep=deep(root.right); //右子树的深度
+            max=Math.max(Rdeep+Ldeep,max); //更新直径最大值，本树的直径
         
-        return 1+Math.max(Ldeep,Rdeep);//返回的是深度
+        return 1+Math.max(Ldeep,Rdeep);//返回的是本节点作为根结点树的深度
     }
 }
