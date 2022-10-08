@@ -14,35 +14,21 @@
  * }
  */
 class Solution {
-        public boolean isBalanced(TreeNode root) {
-        if(root==null){
-            return true;
-        }
-        if(isBalanced(root.left) && isBalanced(root.right)){ //左子树和右子树都是balanced的
-            int left_depth=depth(root.left);  //计算左子树高度
-            int right_depth=depth(root.right); //计算右子树高度
-            return Math.abs(left_depth - right_depth) <= 1;
-        }
-        return false;
-
+    public boolean isBalanced(TreeNode root) {
+        return balanced(root)!=-1;
     }
-    public int depth(TreeNode root){ //计算深度的函数
+    public int balanced(TreeNode root){
         if(root==null){
-            return 0;
+            return 0; //高度为0
         }
-        int left_depth=0;
-        int right_depth=0;
-        if(root.left!=null){
-             left_depth=depth(root.left);
+        int left_height=balanced(root.left);//左子树的高度
+        int right_height=balanced(root.right);//右子树的高度
+        if(left_height==-1 || right_height==-1){ //高度为-1说明不是平衡树
+            return -1;
         }
-        if(root.right!=null){
-             right_depth=depth(root.right);
+        if(Math.abs(left_height-right_height)>1){ //左右子树高度差大于1
+            return -1;
         }
-        if(left_depth>right_depth){
-            return 1+left_depth;
-        }
-        else{
-            return 1+right_depth;
-        }
+        return Math.max(left_height,right_height)+1; //到这步，说明左右子树都是平衡树，且高度差小于1，自身也是平衡树，返回自己的高度
     }
 }
