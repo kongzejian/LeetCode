@@ -1,0 +1,39 @@
+删除二叉树有两种方法，区别在于如何删除一个左右孩子不为空的结点：
+1. 代码随想录中的方法，如果要删除的结点有左右孩子，先找到右子树中的最小结点，将删除结点的左子树成为最小结点的左子树，返回删除结点的右子树
+2. 官方答案，如果要删除的结点有左右孩子，先找到右子树中的最小结点，将最小结点替代要删除的结点，具体操作为，先将要删除结点的右子树中将此最小结点删除，
+最小结点替代要删除元素，最小结点的左子树接入删除结点的左子树，最小结点的右子树接入要删除结点的右子树。
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val > key) {
+            root.left = deleteNode(root.left, key);
+            return root;
+        }
+        if (root.val < key) {
+            root.right = deleteNode(root.right, key);
+            return root;
+        }
+        if (root.val == key) {
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+            if (root.right == null) {
+                return root.left;
+            }
+            if (root.left == null) {
+                return root.right;
+            }
+            TreeNode successor = root.right;
+            while (successor.left != null) {
+                successor = successor.left; //找到右子树的最小结点
+            }
+            root.right = deleteNode(root.right, successor.val);//将要删除结点的右子树中将此最小结点删除
+            successor.right = root.right;//最小结点的右子树接入要删除结点的右子树
+            successor.left = root.left;//最小结点的左子树接入删除结点的左子树
+            return successor;//最小结点替代要删除元素
+        }
+        return root;
+    }
+}
