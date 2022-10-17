@@ -15,30 +15,20 @@
  */
 class Solution {
     public TreeNode trimBST(TreeNode root, int low, int high) {
-       if(root==null){
-            return null; //结点为空
+        return trim(root,low,high);
+    }
+    public TreeNode trim(TreeNode root,int low,int high){
+        if(root==null){
+            return null;
         }
-        else if(root.val<low){
-            root.left=null;
-            root=root.right;
-            return trimBST(root,low,high); //根结点小于low，根结点的左支全部小于，全部删除，根结点替换为右节点
+        if(root.val<low){
+            return trim(root.right,low,high); //如果当前结点小于low，递归右子树，要给上一级返回一个不包含当前结点，修剪好的右子树
         }
-        else if(root.val>high){
-            root.right=null;
-            root=root.left;
-            return trimBST(root,low,high); //根结点大于high，根结点的右支全部大于，全部删除，根结点替换为左节点
+        if(root.val>high){
+            return trim(root.left,low,high); //如果当前结点大于left，递归左子树，要给上一级返回一个不包含当前结点，修剪好的左子树
         }
-        if(root.left==null && root.right==null){
-            return root;                            //叶结点且满足区间要求，直接返回
-        }
-        if(root.left!=null && root.left.val<low){   //左结点小于，但是左结点的右节点可能满足
-            root.left=root.left.right;
-        }
-        if(root.right!=null && root.right.val>high){ //右结点大于，但是右结点的左节点可能满足
-            root.right=root.right.left;
-        }
-        root.left=trimBST(root.left,low,high);
-        root.right=trimBST(root.right,low,high);
+        root.left=trim(root.left,low,high);
+        root.right=trim(root.right,low,high);
         return root;
     }
 }
