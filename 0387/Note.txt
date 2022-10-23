@@ -1,0 +1,6 @@
+哈希表遍历
+
+for(Map.Entry<Object,Object> entry: 哈希表的名字.entrySet()){
+键=entry.getKey()
+值entry.getValue()
+}
