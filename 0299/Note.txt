@@ -1,0 +1,21 @@
+class Solution {
+    public String getHint(String secret, String guess) {
+        int bulls = 0;
+        int[] cntS = new int[10];
+        int[] cntG = new int[10];
+        for (int i = 0; i < secret.length(); ++i) {
+            if (secret.charAt(i) == guess.charAt(i)) {
+                ++bulls;
+            } else {
+                ++cntS[secret.charAt(i) - '0']; //以数字为索引，数量为内容
+                ++cntG[guess.charAt(i) - '0'];
+            }
+        }
+        int cows = 0;
+        for (int i = 0; i < 10; ++i) {
+            cows += Math.min(cntS[i], cntG[i]); //神来之笔
+        }
+        return Integer.toString(bulls) + "A" + Integer.toString(cows) + "B";
+    }
+}
+官方答案，根本没有用哈希表，因为都是数字，所以值需要一个可以存放10个元素的数组
