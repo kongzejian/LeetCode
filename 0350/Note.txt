@@ -1,0 +1,28 @@
+官方答案：
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersect(nums2, nums1);
+        }
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>(); //创建哈希表
+        for (int num : nums1) {
+            int count = map.getOrDefault(num, 0) + 1; //如果没有添加元素并值设为1，如果存在元素，键值对的值在原有基础上加一
+            map.put(num, count);
+        }
+        int[] intersection = new int[nums1.length];//根据size小的那个数组创建答案
+        int index = 0;
+        for (int num : nums2) {
+            int count = map.getOrDefault(num, 0);
+            if (count > 0) {
+                intersection[index++] = num;//发现重合元素，添加进答案
+                count--;
+                if (count > 0) {
+                    map.put(num, count);//键值对记录的值减一
+                } else {
+                    map.remove(num);//count小于等于0，移除
+                }
+            }
+        }
+        return Arrays.copyOfRange(intersection, 0, index);//取子集
+    }
+}
