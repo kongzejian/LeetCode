@@ -1,0 +1,25 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if(s2.length()<s1.length()){
+            return false;
+        }
+        int[] char1=new int[26];
+        int[] char2=new int[26]; //如果判断字母，可以建立26个元素的数组，学会了
+        for(int i=0;i<s1.length();i++){
+            char1[s1.charAt(i)-'a']+=1;
+            char2[s2.charAt(i)-'a']+=1;
+        }                                 
+        if(Arrays.equals(char1,char2)){ //判断两个数组是否相等
+            return true;
+        }
+
+        for(int i=s1.length();i<s2.length();i++){
+            char2[s2.charAt(i)-'a']+=1; //滑动窗口右移
+            char2[s2.charAt(i-s1.length())-'a']-=1; //剔除最左侧的元素
+            if(Arrays.equals(char1,char2)){
+                return true;
+            }
+        }
+        return false;
+    }
+}
