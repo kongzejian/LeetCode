@@ -1,0 +1,15 @@
+二分查找新模板，之前那个在某些题目中是比较好用的，但是由于越界的问题，让我非常不爽，所以使用这个新模板，左闭右闭，left的左侧不包括left为红色区域，right的右侧不包括right为蓝色区域
+中间的[left,right]待判定，当循环结束，必定有Left越过right或,right越过Left,此时根据题目要求，需要返回红蓝边界，是红则返回left-1,是蓝则返回right+1
+int left=0;
+int right=nums.length-1;
+int mid;
+while(left<=right){ //左边红色，右边蓝色
+mid=left+(right-left)/2;
+if(mid属于蓝色区域){ 
+      right=mid-1; //right左边全是红，left右边全是蓝，中间闭区间未知
+}
+else{
+ left=mid+1
+}
+return left-1或者right+1
+}
