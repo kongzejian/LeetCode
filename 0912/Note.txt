@@ -1,0 +1,33 @@
+//归并排序
+class Solution {
+    public int[] sortArray(int[] nums) {
+         return sort(nums,0, nums.length-1);
+    }
+     public int[] sort(int[] nums,int left,int right){
+        if(left==right){
+            return new int[]{nums[left]};
+        }
+        int mid=left+(right-left)/2;
+        int[] l=sort(nums,left,mid);
+        int[] r=sort(nums,mid+1,right);
+        int[] cur=new int[l.length+r.length];
+        int m=0;
+        int n=0;
+        int i=0;
+        while(m<l.length&&n<r.length){
+            if(l[m]<r[n]){
+                cur[i++]=l[m++];
+            }
+            else{
+                cur[i++]=r[n++];
+            }
+        }
+        while(m<l.length){
+            cur[i++]=l[m++];
+        }
+        while(n<r.length){
+            cur[i++]=r[n++];
+        }
+        return cur;
+    }
+}
