@@ -1,0 +1,3 @@
+比如 196 491 381 157 157 134
+如果更新prediff写在外面，第一个157，curdiff为0，prediff=-224,result不加一，但是第二个157，prediff为0，curdiff=-23，result加一，不应加一，result错算为4
+所以答案更新prediff写在里面，算491时，prediff=295,curdiff=-110,result为2；算381时，prediff还为295,不加一；算第一个157，prediff为295不加一；算第二个157，prediff为295，不加一
